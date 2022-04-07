@@ -11,7 +11,10 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
+
+import com.gzeinnumer.day4_4.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,27 +23,27 @@ public class MainActivity extends AppCompatActivity {
 
     //todo 5
     private ArrayList<User> list = new ArrayList<>();
-    private RecyclerView rvData ;
     private RvAdapter adapter;
-    private EditText edSearch;
+
+    private ActivityMainBinding binding;
+    //activity_main.xml
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //todo 6
-        rvData = findViewById(R.id.rv);
-        edSearch = findViewById(R.id.ed_search);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         list = User.generateDataItem();
         list.add(new User("Zein", "Zein aja"));
         adapter = new RvAdapter(getApplicationContext(), list);
-        rvData.setAdapter(adapter);
-        rvData.hasFixedSize();
-        rvData.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        edSearch.addTextChangedListener(new TextWatcher() {
+
+        binding.rvData.setAdapter(adapter);
+        binding.rvData.hasFixedSize();
+        binding.rvData.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        binding.edSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
